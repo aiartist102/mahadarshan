@@ -1,0 +1,6 @@
+{
+  "name": "ApexAI — Practical AI Tools & Systems",
+  "description": "Practical AI tools, templates, prompts and step-by-step systems designed to help you save time, create faster, and build new digital opportunities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

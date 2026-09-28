@@ -1,0 +1,174 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile representation in Firestore",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "photoURL": { "type": "string", "maxLength": 1024 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer purchase order for AI toolkits and bundles",
+      "type": "object",
+      "properties": {
+        "orderId": { "type": "string", "maxLength": 64 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "customerName": { "type": "string", "maxLength": 128 },
+        "customerEmail": { "type": "string", "maxLength": 256 },
+        "productTitle": { "type": "string", "maxLength": 256 },
+        "totalPaid": { "type": "number" },
+        "currency": { "type": "string", "maxLength": 16 },
+        "paymentMethod": { "type": "string", "maxLength": 32 },
+        "status": { "type": "string", "enum": ["completed", "pending"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["orderId", "customerEmail", "productTitle", "totalPaid"]
+    },
+    "Lead": {
+      "title": "Lead",
+      "description": "Lead magnet opt-in submission for the free AI guide",
+      "type": "object",
+      "properties": {
+        "firstName": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "resourceName": { "type": "string", "maxLength": 256 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["firstName", "email", "resourceName"]
+    },
+    "SavedItem": {
+      "title": "SavedItem",
+      "description": "Bookmarked toolkit saved by an authenticated user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "productId": { "type": "string", "maxLength": 128 },
+        "productTitle": { "type": "string", "maxLength": 256 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "productId", "productTitle"]
+    },
+    "BlogPost": {
+      "title": "BlogPost",
+      "description": "Dynamic article or tutorial published on ApexAI",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "slug": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 256 },
+        "excerpt": { "type": "string", "maxLength": 512 },
+        "category": { "type": "string", "maxLength": 64 },
+        "readTime": { "type": "string", "maxLength": 32 },
+        "publishedAt": { "type": "string", "maxLength": 64 },
+        "content": { "type": "string", "maxLength": 50000 },
+        "author": { "type": "string", "maxLength": 128 },
+        "imageUrl": { "type": "string", "maxLength": 2048 },
+        "tags": { "type": "string", "maxLength": 256 },
+        "featured": { "type": "boolean" },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "title", "excerpt", "category", "content"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Dynamic digital product, toolkit, or prompt pack",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 256 },
+        "slug": { "type": "string", "maxLength": 128 },
+        "category": { "type": "string", "maxLength": 64 },
+        "categoryLabel": { "type": "string", "maxLength": 128 },
+        "tagline": { "type": "string", "maxLength": 512 },
+        "description": { "type": "string", "maxLength": 2048 },
+        "fullDescription": { "type": "string", "maxLength": 25000 },
+        "priceINR": { "type": "number" },
+        "originalPriceINR": { "type": "number" },
+        "badge": { "type": "string", "maxLength": 64 },
+        "rating": { "type": "number" },
+        "reviewsCount": { "type": "number" },
+        "format": { "type": "string", "maxLength": 128 },
+        "difficulty": { "type": "string", "maxLength": 64 },
+        "imageUrl": { "type": "string", "maxLength": 2048 },
+        "pdfUrl": { "type": "string", "maxLength": 2048 },
+        "pdfFileName": { "type": "string", "maxLength": 256 },
+        "samplePreviewTitle": { "type": "string", "maxLength": 256 },
+        "samplePreviewContent": { "type": "string", "maxLength": 2048 },
+        "popular": { "type": "boolean" },
+        "featured": { "type": "boolean" },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "title", "category", "priceINR"]
+    },
+    "Bundle": {
+      "title": "Bundle",
+      "description": "High-value dynamic digital bundle and multi-toolkit pack",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 256 },
+        "subtitle": { "type": "string", "maxLength": 512 },
+        "badge": { "type": "string", "maxLength": 64 },
+        "badgeType": { "type": "string", "maxLength": 64 },
+        "priceINR": { "type": "number" },
+        "originalPriceINR": { "type": "number" },
+        "savingsPercent": { "type": "number" },
+        "imageUrl": { "type": "string", "maxLength": 2048 },
+        "fullDescription": { "type": "string", "maxLength": 25000 },
+        "pdfUrl": { "type": "string", "maxLength": 2048 },
+        "pdfFileName": { "type": "string", "maxLength": 256 },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "title", "priceINR"]
+    },
+    "TestConnection": {
+      "title": "TestConnection",
+      "description": "Health check document used to verify Firestore connectivity on boot",
+      "type": "object",
+      "properties": {
+        "status": { "type": "string", "maxLength": 32 }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Stores user public profile information"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Stores digital product purchase records"
+    },
+    "/leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Stores opt-ins for the free 50 Prompts Guide"
+    },
+    "/savedItems/{savedItemId}": {
+      "schema": "SavedItem",
+      "description": "Stores user bookmarked toolkits"
+    },
+    "/blogPosts/{blogPostId}": {
+      "schema": "BlogPost",
+      "description": "Stores dynamic blog articles and tutorials managed by admin"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Stores dynamic AI digital products, toolkits and prompt packs"
+    },
+    "/bundles/{bundleId}": {
+      "schema": "Bundle",
+      "description": "Stores dynamic high-ticket AI bundles and powerpacks"
+    },
+    "/test/{testId}": {
+      "schema": "TestConnection",
+      "description": "Health check document for connection testing"
+    }
+  }
+}

@@ -1,0 +1,197 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'dipakprajapati102@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isValidUser(data) {
+      return data.uid is string && data.uid.size() <= 128
+        && data.email is string && data.email.size() <= 256
+        && (!('displayName' in data) || (data.displayName is string && data.displayName.size() <= 128))
+        && (!('photoURL' in data) || (data.photoURL is string && data.photoURL.size() <= 1024))
+        && (!('createdAt' in data) || (data.createdAt is string && data.createdAt.size() <= 64));
+    }
+
+    function isValidOrder(data) {
+      return data.orderId is string && data.orderId.size() <= 64
+        && data.customerEmail is string && data.customerEmail.size() <= 256
+        && data.productTitle is string && data.productTitle.size() <= 256
+        && data.totalPaid is number && data.totalPaid >= 0
+        && (!('userId' in data) || (data.userId is string && data.userId.size() <= 128))
+        && (!('customerName' in data) || (data.customerName is string && data.customerName.size() <= 128))
+        && (!('currency' in data) || (data.currency is string && data.currency.size() <= 16))
+        && (!('paymentMethod' in data) || (data.paymentMethod is string && data.paymentMethod.size() <= 32))
+        && (!('status' in data) || (data.status in ['completed', 'pending']))
+        && (!('pdfUrl' in data) || (data.pdfUrl is string && data.pdfUrl.size() <= 2048))
+        && (!('downloadUrl' in data) || (data.downloadUrl is string && data.downloadUrl.size() <= 2048))
+        && (!('createdAt' in data) || (data.createdAt is string && data.createdAt.size() <= 64));
+    }
+
+    function isValidLead(data) {
+      return data.firstName is string && data.firstName.size() <= 128
+        && data.email is string && data.email.size() <= 256
+        && data.resourceName is string && data.resourceName.size() <= 256
+        && (!('createdAt' in data) || (data.createdAt is string && data.createdAt.size() <= 64));
+    }
+
+    function isValidSavedItem(data) {
+      return data.userId is string && data.userId.size() <= 128
+        && data.productId is string && data.productId.size() <= 128
+        && data.productTitle is string && data.productTitle.size() <= 256
+        && (!('createdAt' in data) || (data.createdAt is string && data.createdAt.size() <= 64));
+    }
+
+    function isValidBlogPost(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.title is string && data.title.size() <= 256
+        && data.excerpt is string && data.excerpt.size() <= 512
+        && data.category is string && data.category.size() <= 64
+        && data.content is string && data.content.size() <= 50000
+        && (!('slug' in data) || (data.slug is string && data.slug.size() <= 128))
+        && (!('readTime' in data) || (data.readTime is string && data.readTime.size() <= 32))
+        && (!('publishedAt' in data) || (data.publishedAt is string && data.publishedAt.size() <= 64))
+        && (!('author' in data) || (data.author is string && data.author.size() <= 128))
+        && (!('imageUrl' in data) || (data.imageUrl is string && data.imageUrl.size() <= 2048))
+        && (!('tags' in data) || (data.tags is string && data.tags.size() <= 256))
+        && (!('featured' in data) || (data.featured is bool))
+        && (!('updatedAt' in data) || (data.updatedAt is string && data.updatedAt.size() <= 64));
+    }
+
+    function isValidProduct(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.title is string && data.title.size() <= 256
+        && data.category is string && data.category.size() <= 64
+        && data.priceINR is number && data.priceINR >= 0
+        && (!('slug' in data) || (data.slug is string && data.slug.size() <= 128))
+        && (!('categoryLabel' in data) || (data.categoryLabel is string && data.categoryLabel.size() <= 128))
+        && (!('tagline' in data) || (data.tagline is string && data.tagline.size() <= 512))
+        && (!('description' in data) || (data.description is string && data.description.size() <= 2048))
+        && (!('fullDescription' in data) || (data.fullDescription is string && data.fullDescription.size() <= 25000))
+        && (!('originalPriceINR' in data) || (data.originalPriceINR is number))
+        && (!('badge' in data) || (data.badge is string && data.badge.size() <= 64))
+        && (!('rating' in data) || (data.rating is number))
+        && (!('reviewsCount' in data) || (data.reviewsCount is number))
+        && (!('format' in data) || (data.format is string && data.format.size() <= 128))
+        && (!('difficulty' in data) || (data.difficulty is string && data.difficulty.size() <= 64))
+        && (!('imageUrl' in data) || (data.imageUrl is string && data.imageUrl.size() <= 2048))
+        && (!('pdfUrl' in data) || (data.pdfUrl is string && data.pdfUrl.size() <= 2048))
+        && (!('pdfFileName' in data) || (data.pdfFileName is string && data.pdfFileName.size() <= 256))
+        && (!('samplePreviewTitle' in data) || (data.samplePreviewTitle is string && data.samplePreviewTitle.size() <= 256))
+        && (!('samplePreviewContent' in data) || (data.samplePreviewContent is string && data.samplePreviewContent.size() <= 2048))
+        && (!('deliverables' in data) || (data.deliverables is list))
+        && (!('learningPoints' in data) || (data.learningPoints is list))
+        && (!('targetAudience' in data) || (data.targetAudience is list))
+        && (!('bonuses' in data) || (data.bonuses is list))
+        && (!('faqs' in data) || (data.faqs is list))
+        && (!('curriculum' in data) || (data.curriculum is list))
+        && (!('popular' in data) || (data.popular is bool))
+        && (!('featured' in data) || (data.featured is bool))
+        && (!('updatedAt' in data) || (data.updatedAt is string && data.updatedAt.size() <= 64));
+    }
+
+    function isValidBundle(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.title is string && data.title.size() <= 256
+        && data.priceINR is number && data.priceINR >= 0
+        && (!('subtitle' in data) || (data.subtitle is string && data.subtitle.size() <= 512))
+        && (!('badge' in data) || (data.badge is string && data.badge.size() <= 64))
+        && (!('badgeType' in data) || (data.badgeType is string && data.badgeType.size() <= 64))
+        && (!('originalPriceINR' in data) || (data.originalPriceINR is number))
+        && (!('savingsPercent' in data) || (data.savingsPercent is number))
+        && (!('imageUrl' in data) || (data.imageUrl is string && data.imageUrl.size() <= 2048))
+        && (!('fullDescription' in data) || (data.fullDescription is string && data.fullDescription.size() <= 25000))
+        && (!('pdfUrl' in data) || (data.pdfUrl is string && data.pdfUrl.size() <= 2048))
+        && (!('pdfFileName' in data) || (data.pdfFileName is string && data.pdfFileName.size() <= 256))
+        && (!('features' in data) || (data.features is list))
+        && (!('includedProducts' in data) || (data.includedProducts is list))
+        && (!('deliverables' in data) || (data.deliverables is list))
+        && (!('curriculum' in data) || (data.curriculum is list))
+        && (!('targetAudience' in data) || (data.targetAudience is list))
+        && (!('bonuses' in data) || (data.bonuses is list))
+        && (!('faqs' in data) || (data.faqs is list))
+        && (!('updatedAt' in data) || (data.updatedAt is string && data.updatedAt.size() <= 64));
+    }
+
+    // Collection rules
+    match /users/{userId} {
+      allow get: if isSignedIn() && request.auth.uid == userId;
+      allow create: if isSignedIn() && request.auth.uid == userId && isValidUser(incoming());
+      allow update: if isSignedIn() && request.auth.uid == userId && isValidUser(incoming());
+      allow delete: if false;
+    }
+
+    match /orders/{orderId} {
+      allow get: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isValidId(orderId) && isValidOrder(incoming()) && (
+        incoming().userId == 'guest' || (isSignedIn() && incoming().userId == request.auth.uid)
+      );
+      allow update, delete: if false;
+    }
+
+    match /leads/{leadId} {
+      allow create: if isValidId(leadId) && isValidLead(incoming());
+      allow read, update, delete: if false;
+    }
+
+    match /savedItems/{savedItemId} {
+      allow get, list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isValidId(savedItemId) && isSignedIn() && incoming().userId == request.auth.uid && isValidSavedItem(incoming());
+      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow update: if false;
+    }
+
+    match /blogPosts/{blogPostId} {
+      allow get, list: if true;
+      allow create: if isValidId(blogPostId) && isAdmin() && isValidBlogPost(incoming());
+      allow update: if isValidId(blogPostId) && isAdmin() && isValidBlogPost(incoming());
+      allow delete: if isValidId(blogPostId) && isAdmin();
+    }
+
+    match /products/{productId} {
+      allow get, list: if true;
+      allow create: if isValidId(productId) && isAdmin() && isValidProduct(incoming());
+      allow update: if isValidId(productId) && isAdmin() && isValidProduct(incoming());
+      allow delete: if isValidId(productId) && isAdmin();
+    }
+
+    match /bundles/{bundleId} {
+      allow get, list: if true;
+      allow create: if isValidId(bundleId) && isAdmin() && isValidBundle(incoming());
+      allow update: if isValidId(bundleId) && isAdmin() && isValidBundle(incoming());
+      allow delete: if isValidId(bundleId) && isAdmin();
+    }
+
+    match /test/{testId} {
+      allow get: if true;
+      allow list, write: if false;
+    }
+  }
+}
