@@ -1,0 +1,172 @@
+import { FestivalItem } from '../types';
+
+export const festivalsList: FestivalItem[] = [
+  {
+    id: 'maha-shivratri',
+    name: 'Maha Shivratri',
+    hindiName: 'महाशिवरात्रि (महानिशीथ काल)',
+    date: '2026-02-15',
+    dayOfWeek: 'Sunday',
+    religion: 'hindu',
+    isVrat: true,
+    description: 'The great cosmic night of Lord Shiva and Mata Parvati’s celestial wedding. Devotees observe day and night fasting and four-prahar Jalabhishek and Rudrabhishek.',
+    rituals: 'Continuous Bilvapatra archana, chanting Om Namah Shivaya, Maha Nishita Kaal Puja at midnight, keeping vigil (Jagaran).',
+    muhurat: 'Nishita Kaal Puja: 12:09 AM to 01:00 AM'
+  },
+  {
+    id: 'chaitra-navratri',
+    name: 'Chaitra Navratri & Hindu New Year (Vikram Samvat)',
+    hindiName: 'चैत्र नवरात्रि एवं नवसंवत्सर (गुड़ी पड़वा / उगादी)',
+    date: '2026-03-19',
+    dayOfWeek: 'Thursday',
+    religion: 'hindu',
+    isVrat: true,
+    description: 'Nine divine nights dedicated to the nine incarnations of Goddess Durga (Navadurga) along with Ugadi in Karnataka/Andhra and Gudi Padwa in Maharashtra.',
+    rituals: 'Ghatasthapana (Kalash installation), Akhand Jyoti lighting, Durga Saptashati recitation, Kanya Pujan on Ashtami/Navami.',
+    muhurat: 'Ghatasthapana Muhurat: 06:22 AM to 10:14 AM'
+  },
+  {
+    id: 'ram-navami',
+    name: 'Sri Rama Navami',
+    hindiName: 'श्री राम नवमी',
+    date: '2026-03-27',
+    dayOfWeek: 'Friday',
+    religion: 'hindu',
+    isVrat: true,
+    description: 'Auspicious birth anniversary of Bhagwan Maryada Purushottam Rama in Ayodhya at midday during Abhijit Muhurat.',
+    rituals: 'Ramcharitmanas Akhand Path, baby Rama swing ceremony (Palna), panakam and kosambari distribution, Ayodhya Maha Aarti.',
+    muhurat: 'Madhyahna Ram Janmotsav Muhurat: 11:12 AM to 01:38 PM'
+  },
+  {
+    id: 'mahavir-jayanti',
+    name: 'Mahavir Janma Kalyanak',
+    hindiName: 'महावीर स्वामी जन्म कल्याणक',
+    date: '2026-03-31',
+    dayOfWeek: 'Tuesday',
+    religion: 'jain',
+    isVrat: true,
+    description: 'Birth anniversary of the 24th Tirthankara Bhagwan Mahavira, celebrating universal non-violence (Ahimsa), truth, and compassion.',
+    rituals: 'Grand Rath Yatra procession, Abhishek of Tirthankara idols with fragrant water, recitation of sacred Jain Stavans, distribution of food and medicine.',
+    muhurat: 'Prabhat Pheri & Shanti Snan: 06:00 AM to 09:00 AM'
+  },
+  {
+    id: 'hanuman-jayanti',
+    name: 'Sri Hanuman Janmotsav',
+    hindiName: 'श्री हनुमान जन्मोत्सव',
+    date: '2026-04-02',
+    dayOfWeek: 'Thursday',
+    religion: 'hindu',
+    isVrat: true,
+    description: 'Celebration of Sankat Mochan Lord Hanuman’s birth on Chaitra Purnima, bestowing courage, strength, and dispelling evil influences.',
+    rituals: 'Sindoor and jasmine oil offering (Chola), 108 recitation of Hanuman Chalisa and Sundarkand, distributing boondi prasad.',
+    muhurat: 'Purnima Tithi: 06:18 AM to next day 04:42 AM'
+  },
+  {
+    id: 'vaisakhi-khalsa',
+    name: 'Vaisakhi & Khalsa Sajna Diwas',
+    hindiName: 'ਵੈਸਾਖੀ / ਖ਼ਾਲਸਾ ਸਾਜਨਾ ਦਿਵਸ (बैसाखी)',
+    date: '2026-04-14',
+    dayOfWeek: 'Tuesday',
+    religion: 'sikh',
+    isVrat: false,
+    description: 'Historic day in 1699 when the tenth Guru, Sri Guru Gobind Singh Ji created the Khalsa Panth at Anandpur Sahib with Panj Pyare. Also marks harvest thanksgiving.',
+    rituals: 'Amrit Sanchar ceremony, Nagar Kirtan led by Panj Pyare, Akhand Path Bhog, Guru Ka Langar in all historic Gurudwaras.',
+    muhurat: 'Amrit Vela Kirtan: 03:00 AM onwards'
+  },
+  {
+    id: 'buddha-purnima',
+    name: 'Buddha Purnima (Vesak)',
+    hindiName: 'बुद्ध पूर्णिमा (त्रिविध पावन वैशाख पूर्णिमा)',
+    date: '2026-05-01',
+    dayOfWeek: 'Friday',
+    religion: 'buddha',
+    isVrat: true,
+    description: 'Triple blessed day commemorating Gautama Buddha’s birth, supreme Enlightenment under the Bodhi Tree in Bodh Gaya, and Maha Parinirvana.',
+    rituals: 'Meditation under the Bodhi tree, circumambulation of Mahabodhi Stupa, lighting butter lamps, reciting Metta Sutta, releasing captive animals.',
+    muhurat: 'Vesak Purnima: Full Day'
+  },
+  {
+    id: 'nirjala-ekadashi',
+    name: 'Nirjala Bhimseni Ekadashi',
+    hindiName: 'निर्जला एकादशी (भीमसेनी एकादशी)',
+    date: '2026-06-25',
+    dayOfWeek: 'Thursday',
+    religion: 'hindu',
+    isVrat: true,
+    description: 'The most austere and spiritually powerful of all 24 Ekadashis. Fasting without even drinking a drop of water bestows the merit of all annual Ekadashis.',
+    rituals: 'Strict waterless fast, offering water pitchers (Jal Kumbha) and seasonal fruits (melons, mangoes) to pilgrims and Brahmins, Vishnu Sahasranama chanting.',
+    muhurat: 'Parana Time next morning: 05:35 AM to 08:22 AM'
+  },
+  {
+    id: 'guru-purnima',
+    name: 'Guru Purnima (Veda Vyasa Jayanti)',
+    hindiName: 'गुरु पूर्णिमा (व्यास पूर्णिमा)',
+    date: '2026-07-29',
+    dayOfWeek: 'Wednesday',
+    religion: 'hindu',
+    isVrat: true,
+    description: 'Sacred day honoring the Guru as the remover of darkness and birthday of sage Krishna Dvaipayana Veda Vyasa, compiler of the Vedas.',
+    rituals: 'Guru Paduka Pujan, offering Dakshina and gratitude to teachers and masters, initiation into spiritual mantras.',
+    muhurat: 'Purnima Tithi: 04:12 AM to 02:40 AM'
+  },
+  {
+    id: 'krishna-janmashtami',
+    name: 'Shri Krishna Janmashtami',
+    hindiName: 'श्री कृष्ण जन्माष्टमी (मथुरा व गोकुल उत्सव)',
+    date: '2026-09-04',
+    dayOfWeek: 'Friday',
+    religion: 'hindu',
+    isVrat: true,
+    description: 'Joyous advent of Lord Krishna at midnight under the Rohini Nakshatra in Mathura. Celebrated worldwide with Dahi Handi and midnight aarti.',
+    rituals: 'Bal Gopal Panchamrit Abhishek, preparing Makhan Mishri and 56 Bhog, swinging Laddu Gopal in decorated jhulas, fasting until midnight birth.',
+    muhurat: 'Midnight Janmotsav Muhurat: 11:58 PM to 12:44 AM'
+  },
+  {
+    id: 'ganesh-chaturthi',
+    name: 'Ganesh Chaturthi (Vinayaka Chavithi)',
+    hindiName: 'गणेश चतुर्थी (महागणपति प्रतिष्ठा)',
+    date: '2026-09-14',
+    dayOfWeek: 'Monday',
+    religion: 'hindu',
+    isVrat: true,
+    description: '10-day grand festival welcoming Lord Ganesha, the harbinger of good fortune and remover of all hindrances, concluding on Anant Chaturdashi.',
+    rituals: 'Prana Pratishtha of clay Ganesha idol, offering 21 Modaks and 21 Durva grass blades, Atharvashirsha chanting.',
+    muhurat: 'Madhyahna Ganesha Puja Muhurat: 11:05 AM to 01:34 PM'
+  },
+  {
+    id: 'paryushan-parva',
+    name: 'Paryushan Mahaparva & Samvatsari',
+    hindiName: 'पर्यूषण महापर्व एवं संवत्सरी (मिच्छामि दुक्कडम्)',
+    date: '2026-09-08',
+    dayOfWeek: 'Tuesday',
+    religion: 'jain',
+    isVrat: true,
+    description: 'The supreme Jain spiritual festival of self-purification, fasting, listening to Kalpasutra, concluding with universal forgiveness (Kshamavani).',
+    rituals: 'Upvas, Bela, Tela fasts, Pratikraman, asking forgiveness from all living beings saying "Micchami Dukkadam" with pure heart.',
+    muhurat: 'Samvatsari Pratikraman: Evening Pradosh Kaal'
+  },
+  {
+    id: 'diwali-lakshmi-puja',
+    name: 'Deepawali & Maha Lakshmi Puja',
+    hindiName: 'दीपावली (महालक्ष्मी एवं कुबेर पूजन)',
+    date: '2026-11-08',
+    dayOfWeek: 'Sunday',
+    religion: 'hindu',
+    isVrat: true,
+    description: 'The festival of lights commemorating Lord Rama’s triumphant return to Ayodhya and the auspicious appearance of Goddess Lakshmi from Samudra Manthan.',
+    rituals: 'Lighting earthen oil diyas, drawing colorful rice rangolis, Pradosh Kaal and Nishita Kaal Lakshmi-Kuber pujan, distributing sweets.',
+    muhurat: 'Pradosh Kaal Lakshmi Puja: 05:42 PM to 07:38 PM'
+  },
+  {
+    id: 'guru-nanak-gurpurab',
+    name: 'Guru Nanak Dev Ji Parkash Purab',
+    hindiName: 'ਗੁਰੂ ਨਾਨਕ ਦੇਵ ਜੀ ਪ੍ਰਕਾਸ਼ ਪੁਰਬ (गुरु पर्व)',
+    date: '2026-11-24',
+    dayOfWeek: 'Tuesday',
+    religion: 'sikh',
+    isVrat: false,
+    description: 'Celebration of the birth of the founder of Sikhism, Sri Guru Nanak Dev Ji on Kartik Purnima, who preached unity of God and selfless service.',
+    rituals: '48-hour continuous Akhand Path of Guru Granth Sahib, Prabhat Pheris at dawn, illumination of Gurudwaras (Deepmala), community langar.',
+    muhurat: 'Kartik Purnima Amrit Vela: 03:00 AM onwards'
+  }
+];
